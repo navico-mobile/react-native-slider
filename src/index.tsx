@@ -688,6 +688,16 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
         const minTrackWidth = _startFromZero
             ? Math.abs(_value) * sliderWidthCoefficient - thumbSize.width / 2
             : interpolatedTrackValues[0];
+        const clearBorderRadius = {} as ViewStyle;
+        if (_startFromZero && _value < 0 + step) {
+            clearBorderRadius.borderBottomRightRadius = 0;
+            clearBorderRadius.borderTopRightRadius = 0;
+        }
+        if (_startFromZero && _value > 0) {
+            clearBorderRadius.borderTopLeftRadius = 0;
+            clearBorderRadius.borderBottomLeftRadius = 0;
+        }
+
         const minimumTrackStyle = {
             position: 'absolute',
             left:
@@ -703,6 +713,7 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
                       ),
             backgroundColor: minimumTrackTintColor,
             ...valueVisibleStyle,
+            ...clearBorderRadius,
         } as ViewStyle;
 
         const touchOverflowStyle = this._getTouchOverflowStyle();
