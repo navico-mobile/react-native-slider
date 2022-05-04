@@ -40,6 +40,11 @@ export type SliderProps = {
     trackMarks?: Array<number>;
     trackStyle?: ViewStyle;
     value?: Animated.Value | number | Array<number>;
+    /**
+     * Allows the start from the zero value. Can be useful for cases with negative minimum and positive maximum values.
+     * Can be applied only with single value.
+     */
+    startFromZero?: boolean;
     vertical?: boolean;
 };
 
