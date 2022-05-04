@@ -634,7 +634,9 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
             values,
         } = this.state;
         const _startFromZero =
-            values.length === 1 && minimumValue < 0 ? startFromZero : false;
+            values.length === 1 && minimumValue < 0 && maximumValue > 0
+                ? startFromZero
+                : false;
         const interpolatedThumbValues = values.map((value) =>
             value.interpolate({
                 inputRange: [minimumValue, maximumValue],
