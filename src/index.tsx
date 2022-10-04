@@ -250,6 +250,7 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
     _handlePanResponderGrant = (e: {nativeEvent: any}) => {
         const {thumbSize} = this.state;
         const {nativeEvent} = e;
+        this._isSliding = true;
         this._previousLeft = this.props.trackClickable
             ? nativeEvent.locationX - thumbSize.width
             : this._getThumbLeft(this._getCurrentValue(this._activeThumbIndex));
@@ -285,6 +286,7 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
             return;
         }
 
+        this._isSliding = false;
         this._setCurrentValue(
             this._getValue(gestureState),
             this._activeThumbIndex,
@@ -563,6 +565,7 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
     };
 
     _activeThumbIndex: number = 0;
+    _isSliding: boolean = false;
     _containerSize: Dimensions | null | undefined;
     _panResponder: PanResponderInstance;
     _previousLeft: number = 0;
@@ -817,7 +820,10 @@ export class Slider extends PureComponent<SliderProps, SliderState> {
                             ]}
                             onLayout={this._measureThumb}>
                             {renderThumbComponent
-                                ? renderThumbComponent()
+                                ? renderThumbComponent(
+                                      this._activeThumbIndex === i &&
+                                          this._isSliding,
+                                  )
                                 : this._renderThumbImage(i)}
                         </Animated.View>
                     ))}

@@ -29,7 +29,7 @@ export type SliderProps = {
     onSlidingStart?: SliderOnChangeCallback;
     onValueChange?: SliderOnChangeCallback;
     renderAboveThumbComponent?: (index: number) => React.ReactNode;
-    renderThumbComponent?: () => React.ReactNode;
+    renderThumbComponent?: (isThumbActive: boolean) => React.ReactNode;
     renderTrackMarkComponent?: (index: number) => React.ReactNode;
     step?: number;
     thumbImage?: ImageSourcePropType;
