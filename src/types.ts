@@ -50,6 +50,7 @@ export type SliderProps = {
 
 export type SliderState = {
     allMeasured: boolean;
+    isSliding: boolean;
     containerSize: Dimensions;
     thumbSize: Dimensions;
     trackMarksValues?: Array<Animated.Value>;
